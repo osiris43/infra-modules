@@ -28,10 +28,23 @@ variable "cidr_blocks" {
   type        = string
 }
 
+variable "private_subnet_cidr_blocks" {
+  type        = list(string)
+  description = "CIDR ranges for the private subnets"
+}
+
+
+
 # ---------------------------------------------------------------------------------------------------------------------
 # OPTIONAL PARAMETERS
 # These parameters have reasonable defaults.
 # ---------------------------------------------------------------------------------------------------------------------
+
+variable "region-letters" {
+  type        = list(string)
+  description = "region letter suffixes"
+  default     = ["a", "b", "c"]
+}
 variable "tags" {
   type    = map(any)
   default = {}
