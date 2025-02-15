@@ -18,7 +18,7 @@ resource "aws_internet_gateway" "igw" {
   tags   = merge(local.tags, { Name = "${var.env}-${var.name}-igw" })
 }
 
-resource "aws_subnet" "private_subnet_" {
+resource "aws_subnet" "private_subnets" {
   count = length(var.private_subnet_cidr_blocks)
 
   vpc_id            = aws_vpc.vpc.id
