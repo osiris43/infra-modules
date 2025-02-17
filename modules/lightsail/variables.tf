@@ -21,7 +21,6 @@ variable "is_disabled" {
   default     = false
 }
 
-
 variable "ecr_repository" {
   description = "Repository name for ECR to pull images from"
   type        = string
@@ -34,4 +33,10 @@ variable "default_tags" {
 variable "tags" {
   type    = map(any)
   default = {}
+}
+
+variable "container_port" {
+  description = "Port for the service"
+  type        = number
+  default     = 80
 }

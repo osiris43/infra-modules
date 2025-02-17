@@ -51,7 +51,7 @@ resource "aws_lightsail_container_service_deployment_version" "example" {
     command = []
 
     environment = {
-      MY_ENVIRONMENT_VARIABLE = "my_value"
+      FLASK_RUN_PORT = var.container_port
     }
 
     ports = {
@@ -61,7 +61,7 @@ resource "aws_lightsail_container_service_deployment_version" "example" {
 
   public_endpoint {
     container_name = var.name
-    container_port = 5050
+    container_port = var.container_port
 
     health_check {
       healthy_threshold   = 2
