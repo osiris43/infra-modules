@@ -48,7 +48,7 @@ resource "aws_lightsail_container_service_deployment_version" "example" {
     container_name = var.name
     image          = "${var.ecr_repository}:${var.image_version}"
 
-    command = []
+    command = ["flask", "run", "--host=0.0.0.0", "--port=${FLASK_RUN_PORT}"]
 
     environment = {
       FLASK_RUN_PORT = var.container_port
