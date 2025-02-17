@@ -40,3 +40,9 @@ variable "container_port" {
   type        = number
   default     = 80
 }
+
+variable "image_version" {
+  description = "image for the service"
+  type        = string
+  default     = "latest"
+}

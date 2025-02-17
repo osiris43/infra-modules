@@ -46,7 +46,7 @@ resource "aws_ecr_repository_policy" "default" {
 resource "aws_lightsail_container_service_deployment_version" "example" {
   container {
     container_name = var.name
-    image          = var.ecr_repository
+    image          = "${var.ecr_repository}:${var.image_version}"
 
     command = []
 
