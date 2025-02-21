@@ -46,3 +46,9 @@ variable "image_version" {
   type        = string
   default     = "latest"
 }
+
+variable "environment" {
+  description = "key value map of env vars"
+  type        = map(any)
+  default     = {}
+}

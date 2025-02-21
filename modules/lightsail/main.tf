@@ -50,9 +50,7 @@ resource "aws_lightsail_container_service_deployment_version" "example" {
 
     command = ["gunicorn", "-w", "4", "-b", "0.0.0.0:5050", "tyche:app"]
 
-    environment = {
-      FLASK_RUN_PORT = var.container_port
-    }
+    environment = var.environment
 
     ports = {
       5050 = "HTTP"
