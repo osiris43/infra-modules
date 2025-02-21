@@ -52,3 +52,9 @@ variable "environment" {
   type        = map(any)
   default     = {}
 }
+
+variable "dynamo_table_arn" {
+  description = "Dynamo table to grant access to"
+  type        = string
+  default     = ""
+}
