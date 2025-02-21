@@ -48,14 +48,14 @@ resource "aws_lightsail_container_service_deployment_version" "example" {
     container_name = var.name
     image          = "${var.ecr_repository}:${var.image_version}"
 
-    command = ["flask", "run", "--host=0.0.0.0", "--port=80"]
+    command = ["gunicorn", "-w", "4", "-b", "0.0.0.0:5050", "tyche:app"]
 
     environment = {
       FLASK_RUN_PORT = var.container_port
     }
 
     ports = {
-      80 = "HTTP"
+      var.container_port = "HTTP"
     }
   }
 
