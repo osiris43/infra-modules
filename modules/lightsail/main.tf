@@ -37,25 +37,6 @@ data "aws_iam_policy_document" "default" {
     ]
   }
 
-  dynamic "statement" {
-    for_each = length(var.dynamo_table_arn) > 0 ? [1] : []
-
-    content {
-      effect = "Allow"
-
-      actions = [
-        "dynamodb:GetItem",
-        "dynamodb:PutItem",
-        "dynamodb:UpdateItem",
-        "dynamodb:DeleteItem",
-        "dynamodb:Scan",
-        "dynamodb:Query"
-      ]
-
-      resources = [var.dynamo_table_arn]
-    }
-  }
-
 }
 
 resource "aws_ecr_repository_policy" "default" {
