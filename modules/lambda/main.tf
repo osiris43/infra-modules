@@ -33,20 +33,20 @@ module "event_bridge" {
   tags = local.tags
 }
 
-module "s3_notification" {
-  source = "./s3_notification"
+# module "s3_notification" {
+#   source = "./s3_notification"
 
-  enabled       = var.s3_notification.enabled
-  lambda_name   = aws_lambda_function.lambda.function_name
-  lambda_arn    = aws_lambda_function.lambda.arn
-  events        = var.s3_notification.events
-  filter_prefix = var.s3_notification.filter_prefix
-  filter_suffix = var.s3_notification.filter_suffix
-  bucket_arn    = var.s3_notification.bucket_arn
-  bucket_id     = var.s3_notification.bucket_id
+#   enabled       = var.s3_notification.enabled
+#   lambda_name   = aws_lambda_function.lambda.function_name
+#   lambda_arn    = aws_lambda_function.lambda.arn
+#   events        = var.s3_notification.events
+#   filter_prefix = var.s3_notification.filter_prefix
+#   filter_suffix = var.s3_notification.filter_suffix
+#   bucket_arn    = var.s3_notification.bucket_arn
+#   bucket_id     = var.s3_notification.bucket_id
 
-  tags = local.tags
-}
+#   tags = local.tags
+# }
 
 module "cloudwatch_log_subscription" {
   source = "./cloudwatch_log_subscription"
