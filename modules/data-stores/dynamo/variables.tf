@@ -30,6 +30,7 @@ variable "hash_key" {
 variable "range_key" {
   description = "The attribute to use as the range (sort) key. Must also be defined as an attribute"
   type        = string
+  default     = ""
 }
 
 variable "default_tags" {
