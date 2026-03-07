@@ -70,3 +70,25 @@ variable "tags" {
   type    = map(any)
   default = {}
 }
+
+variable "enable_event_bridge" {
+  description = "Whether or not to enable a cloud watch event to trigger lambda automatically"
+  type        = bool
+  default     = false
+}
+
+
+variable "cron_expression" {
+  description = "The cron expression to trigger the lambda automatically. Default is every 10 mins every day"
+  type        = string
+  default     = "0/10 * ? * * *"
+}
+
+
+variable "event_input" {
+  description = "The valid JSON for the cloud watch event to send to the lambda"
+  type        = string
+  default     = null
+}
+
+

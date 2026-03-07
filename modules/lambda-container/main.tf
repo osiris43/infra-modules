@@ -18,6 +18,21 @@ module "iam_role" {
   tags         = local.tags
 }
 
+module "event_bridge" {
+  source = "./event_bridge"
+
+  enabled     = var.enable_event_bridge
+  name        = local.cloudwatch_event_rule_name
+  description = "Schedule for ${var.function_name}"
+  schedule    = "cron(${var.cron_expression})"
+  event_input = var.event_input
+
+  lambda_arn  = aws_lambda_function.lambda.arn
+  lambda_name = var.function_name
+
+  tags = local.tags
+}
+
 resource "aws_lambda_function" "lambda" {
   function_name = var.function_name
   role          = module.iam_role.role_arn
