@@ -4,12 +4,13 @@ resource "aws_iam_role" "lambda" {
 
   assume_role_policy = data.aws_iam_policy_document.lambda_assume_role_policy.json
 
-  inline_policy {
-    name   = "${var.name}-lambda-policy"
-    policy = data.aws_iam_policy_document.lambda_policy.json
-  }
-
   tags = var.tags
+}
+
+resource "aws_iam_role_policy" "lambda" {
+  name   = "${var.name}-lambda-policy"
+  role   = aws_iam_role.lambda.id
+  policy = data.aws_iam_policy_document.lambda_policy.json
 }
 
 data "aws_iam_policy_document" "lambda_assume_role_policy" {
