@@ -1,23 +1,13 @@
 terraform {
   required_version = ">= 1.2.9"
   backend "s3" {}
-  required_providers {
-    aws = {
-      configuration_aliases = [aws.datacenter]
-    }
-  }
 }
 
 locals {
   lambda_role_name           = "${var.function_name}-lambda-role"
   cloudwatch_event_rule_name = "${var.function_name}-schedule"
-  datacenter_account_id      = data.aws_caller_identity.datacenter.account_id
-  image_uri                  = "${local.datacenter_account_id}.dkr.ecr.${var.region}.amazonaws.com/${var.ecr_repository}:latest"
+  image_uri                  = "${var.aws_account_id}.dkr.ecr.${var.region}.amazonaws.com/${var.ecr_repository}:latest"
   tags                       = merge(var.default_tags, var.tags)
-}
-
-data "aws_caller_identity" "datacenter" {
-  provider = aws.datacenter
 }
 
 module "iam_role" {
