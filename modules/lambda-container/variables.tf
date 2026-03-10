@@ -78,10 +78,10 @@ variable "enable_event_bridge" {
 }
 
 
-variable "cron_expression" {
-  description = "The cron expression to trigger the lambda automatically. Default is every 10 mins every day"
-  type        = string
-  default     = "0/10 * ? * * *"
+variable "cron_expressions" {
+  description = "List of cron expressions to trigger the lambda automatically"
+  type        = list(string)
+  default     = []
 }
 
 

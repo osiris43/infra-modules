@@ -19,12 +19,13 @@ module "iam_role" {
 }
 
 module "event_bridge" {
-  source = "./event_bridge"
+  source   = "./event_bridge"
+  for_each = var.enable_event_bridge ? { for i, expr in var.cron_expressions : tostring(i) => expr } : {}
 
-  enabled     = var.enable_event_bridge
-  name        = local.cloudwatch_event_rule_name
+  enabled     = true
+  name        = "${local.cloudwatch_event_rule_name}-${each.key}"
   description = "Schedule for ${var.function_name}"
-  schedule    = "cron(${var.cron_expression})"
+  schedule    = "cron(${each.value})"
   event_input = var.event_input
 
   lambda_arn  = aws_lambda_function.lambda.arn
