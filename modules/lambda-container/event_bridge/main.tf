@@ -20,7 +20,7 @@ resource "aws_cloudwatch_event_target" "schedule_lambda" {
 resource "aws_lambda_permission" "allow_events_bridge_to_run_lambda" {
   count = var.enabled ? 1 : 0
 
-  statement_id  = "AllowExecutionFromCloudWatch"
+  statement_id  = "AllowExecutionFromCloudWatch-${var.name}"
   action        = "lambda:InvokeFunction"
   function_name = var.lambda_name
   principal     = "events.amazonaws.com"
