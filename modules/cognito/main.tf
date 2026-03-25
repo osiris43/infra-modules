@@ -82,6 +82,12 @@ resource "aws_cognito_user_pool_client" "default" {
   ]
 
   generate_secret = false
+
+  depends_on = [
+    aws_cognito_identity_provider.google,
+    aws_cognito_identity_provider.facebook,
+    aws_cognito_identity_provider.apple,
+  ]
 }
 
 resource "aws_cognito_identity_provider" "google" {
@@ -101,7 +107,6 @@ resource "aws_cognito_identity_provider" "google" {
     username = "sub"
   }
 
-  depends_on = [aws_cognito_user_pool_client.default]
 }
 
 resource "aws_cognito_identity_provider" "facebook" {
@@ -124,7 +129,6 @@ resource "aws_cognito_identity_provider" "facebook" {
     username = "id"
   }
 
-  depends_on = [aws_cognito_user_pool_client.default]
 }
 
 resource "aws_cognito_identity_provider" "apple" {
@@ -148,5 +152,4 @@ resource "aws_cognito_identity_provider" "apple" {
     username = "sub"
   }
 
-  depends_on = [aws_cognito_user_pool_client.default]
 }
